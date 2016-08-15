@@ -10,8 +10,8 @@ var gitterHost    = process.env.HOST || 'https://gitter.im';
 var port          = process.env.PORT || 7000;
 
 // Client OAuth configuration
-var clientId      = process.env.GITTER_KEY ? process.env.GITTER_KEY.trim() : undefined;
-var clientSecret  = process.env.GITTER_SECRET ? process.env.GITTER_SECRET.trim() : undefined;
+var clientId      = process.env.GITTER_KEY ? process.env.GITTER_KEY.trim() : 'ea71007cd6a8fa0f5d52b686037e290e34f2cada';
+var clientSecret  = process.env.GITTER_SECRET ? process.env.GITTER_SECRET.trim() : 'a871bcae53b2241d6b37ab682476f3192c6979e0';
 
 // Gitter API client helper
 var gitter = {
@@ -109,9 +109,9 @@ app.get('/', function(req, res) {
   res.render('landing');
 });
 
-
 app.get('/home', function(req, res) {
   if (!req.user) return res.redirect('/');
+  console.log('req.user', req.user);
 
   // Fetch user rooms using the Gitter API
   gitter.fetchRooms(req.user, req.session.token, function(err, rooms) {
@@ -126,6 +126,17 @@ app.get('/home', function(req, res) {
   });
 
 });
+
+// APP REST API FOR AUTH DATA
+app.get('/api/user', function (req, res) {
+console.log('req.session', req.session);
+  console.log('req.user', req.user);
+  if (!req.user) {
+    res.send(401);
+  } else {
+    res.json(req.user)
+  }
+})
 
 app.listen(port);
 console.log('Demo app running at http://localhost:' + port);
