@@ -113,7 +113,7 @@ app.get('/home', function(req, res) {
   // if (!req.user) return res.redirect('/');
   // Fetch user rooms using the Gitter API
   res.render('home', {
-    token: req.session.token,
+    token: req.session.token || '',
   });
   // gitter.fetchRooms(req.user, req.session.token, function(err, rooms) {
   //   if (err) return res.send(500);

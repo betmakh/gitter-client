@@ -1,9 +1,8 @@
-var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
   entry: './main.js',
-  output: { path: './', filename: 'bundle.js' },
+  output: { path: './', filename: 'bundle.js', sourceMapFilename: 'bundle.js.map'},
   module: {
     loaders: [{
       test: /\.scss$/,

@@ -5,7 +5,7 @@ _.mixin({
 	keyMirror: keyMirror
 });
 
-const actions = _.keyMirror({
+const actionConstants = _.keyMirror({
 	USER_LOGIN: null,
 	USER_LOGOUT: null,
 	USER_FETCH: null,
@@ -17,4 +17,4 @@ const requests = _.keyMirror({
 
 })
 
-export {actions, requests};
+export {actionConstants, requests};

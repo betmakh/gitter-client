@@ -1,18 +1,18 @@
-import {actionsConstnts} from '../constants/constants.jsx';
+import {actionConstants} from '../constants/constants.jsx';
 // import fetchUser from '../actions/user.jsx';
 import { combineReducers } from 'redux';
 
 var tokenEl = document.querySelector('#user-token');
-if (tokenEl) {
+if (tokenEl && tokenEl.value.length) {
   sessionStorage.setItem('userToken', tokenEl.value);
 }
 
 const getInitialState = () => {
 	return {
-		token: tokenEl.value || sessionStorage.getItem('userToken')
-		// user:{
-		// 	isRequesting: false,
-		// }
+		token: tokenEl.value.length && tokenEl.value || sessionStorage.getItem('userToken'),
+		user:{
+			isRequesting: true,
+		}
 	}
 }
 
@@ -20,7 +20,7 @@ function userReducer (state = {}, action) {
 	switch (action.type) {
 		case actionConstants.USER_REQUEST:
 			return _.extend({},state,{
-				isRequesting: false
+				isRequesting: true
 			})
 			break;
 		case actionConstants.USER_RECEIVE:
@@ -39,3 +39,5 @@ const rootReducer = function(state = getInitialState(), action) {
 		user: userReducer(state.user, action)
 	})
 }
+
+export default rootReducer;

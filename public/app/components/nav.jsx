@@ -1,22 +1,30 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 
-const navBar = (user, itemSelect) => {
-	<nav role="navigation" class="navbar navbar-default">
-	  <div class="container">
-	    <div class="navbar-header">
-	      <button type="button" data-toggle="collapse" data-target="#navbar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-	      <p href="#" class="navbar-logo"><img src="/img/logo.png"/></p>
+const NavBar = (props) => {
+	const {user, onSelect} = props;
+	console.log('props', props);
+
+	return (<nav role="navigation" className="navbar navbar-default">
+	  <div className="container">
+	    <div className="navbar-header">
+	      <button type="button" data-toggle="collapse" data-target="#navbar-collapse" className="navbar-toggle"><span className="sr-only">Toggle navigation</span><span className="icon-bar"></span><span className="icon-bar"></span><span className="icon-bar"></span></button>
+	      <p href="#" className="navbar-logo"><img src="/img/logo.png"/></p>
 	    </div>
-	    <div id="navbar-collapse" class="collapse navbar-collapse">
-	      <ul class="nav navbar-nav">
+	    <div id="navbar-collapse" className="collapse navbar-collapse">
+	      <ul className="nav navbar-nav">
 	        <li><a href="/">My App</a></li>
 	      </ul>
-	      <ul class="nav navbar-nav navbar-right">
-		      {user ? <li><img src={user.avatarUrlMedium}/><a href="" onClick={e => itemSelected(e)}>LogOut</a></li> : <li><a href="/login">Sign in</a></li>} 
+	      <ul className="nav navbar-nav navbar-right">
+		      {user ? <li><img src={user.avatarUrlMedium}/><a href="" onClick={e => onSelect(e)}>LogOut</a></li> : <li><a href="/login">Sign in</a></li>} 
 	      </ul>
 	    </div>
 	  </div>
-	</nav>
+	</nav>)
 }
 
-export default navBar;
+NavBar.propTypes = {
+	user: PropTypes.object,
+	onSelect: PropTypes.func
+};
+
+export default NavBar;

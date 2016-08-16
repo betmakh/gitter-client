@@ -1,8 +1,9 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware  } from 'redux'
 import app from './reducers/reducers.jsx'
+import AppContainer from './containers/appContainer.jsx'
 import thunkMiddleware from 'redux-thunk'
 import createLogger from 'redux-logger'
 
@@ -17,6 +18,15 @@ const store = createStore(
   )
 )
 
+export default class Root extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    )
+  }
+}
 
 console.log(store.getState())
 
