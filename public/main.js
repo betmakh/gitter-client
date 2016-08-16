@@ -1,5 +1,6 @@
 import { actions } from './app/constants/constants.jsx';
 import fetch from 'isomorphic-fetch';
+import app from './app/app.jsx';
 
 var tokenEl = document.querySelector('#user-token');
 if (tokenEl) {
@@ -16,13 +17,13 @@ if (tokenEl) {
   // console.log('argument', arguments);
 
   //   });
-  fetch('https://api.gitter.im/v1/user?access_token=' + tokenEl.value, {
-    headers: {
-      'Authorization': 'Bearer ' + tokenEl.value,
-    }
-  }).then(resp => resp.json()).then(function(argument) {
-    console.log('argument', arguments);
-  });
+  // fetch('https://api.gitter.im/v1/user?access_token=' + tokenEl.value, {
+  //   headers: {
+  //     'Authorization': 'Bearer ' + tokenEl.value,
+  //   }
+  // }).then(resp => resp.json()).then(function(argument) {
+  //   console.log('argument', arguments);
+  // });
 }
 
 

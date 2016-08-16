@@ -110,33 +110,23 @@ app.get('/', function(req, res) {
 });
 
 app.get('/home', function(req, res) {
-  if (!req.user) return res.redirect('/');
-  console.log('req.user', req.user);
-
+  // if (!req.user) return res.redirect('/');
   // Fetch user rooms using the Gitter API
-  gitter.fetchRooms(req.user, req.session.token, function(err, rooms) {
-    if (err) return res.send(500);
-
-    res.render('home', {
-      user: req.user,
-      token: req.session.token,
-      clientId: clientId,
-      rooms: rooms
-    });
+  res.render('home', {
+    token: req.session.token,
   });
+  // gitter.fetchRooms(req.user, req.session.token, function(err, rooms) {
+  //   if (err) return res.send(500);
+
+  //   res.render('home', {
+  //     user: req.user,
+  //     token: req.session.token,
+  //     clientId: clientId,
+  //     rooms: rooms
+  //   });
+  // });
 
 });
-
-// APP REST API FOR AUTH DATA
-app.get('/api/user', function (req, res) {
-console.log('req.session', req.session);
-  console.log('req.user', req.user);
-  if (!req.user) {
-    res.send(401);
-  } else {
-    res.json(req.user)
-  }
-})
 
 app.listen(port);
 console.log('Demo app running at http://localhost:' + port);

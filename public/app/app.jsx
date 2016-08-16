@@ -2,14 +2,21 @@ import React from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import todoApp from './reducers'
-import App from './components/App'
+import app from './reducers/reducers.jsx'
+import thunkMiddleware from 'redux-thunk'
+import createLogger from 'redux-logger'
 
-let store = createStore(todoApp)
 
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
+const loggerMiddleware = createLogger()
+
+const store = createStore(
+  app,
+  applyMiddleware(
+    thunkMiddleware, // lets us dispatch() functions
+    loggerMiddleware // neat middleware that logs actions
+  )
 )
+
+
+console.log(store.getState())
+
